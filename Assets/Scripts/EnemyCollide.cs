@@ -30,5 +30,9 @@ public class EnemyCollide : MonoBehaviour
         {
             playerHealth.loseHealth(collideDamage);
         }
+        else if (collision.gameObject.name == "Bullet")
+        {
+            
+        }
     }
 }
