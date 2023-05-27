@@ -65,7 +65,7 @@ public class Shooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(FirePoint.up * bulletForce, ForceMode2D.Impulse);
+        rb.AddForce(FirePoint.right * bulletForce, ForceMode2D.Impulse);
     }
 
     IEnumerator fireCooldown()

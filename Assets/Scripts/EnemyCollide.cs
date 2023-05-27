@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyCollide : MonoBehaviour
 {
     public int collideDamage;
+    public int enemyHealth;
 
     PlayerHealth playerHealth;
 
@@ -21,7 +22,10 @@ public class EnemyCollide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (enemyHealth == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,9 +34,9 @@ public class EnemyCollide : MonoBehaviour
         {
             playerHealth.loseHealth(collideDamage);
         }
-        else if (collision.gameObject.name == "Bullet")
+        else if (collision.gameObject.name == "Bullet(Clone)")
         {
-            
+            enemyHealth -= collideDamage;
         }
     }
 }
