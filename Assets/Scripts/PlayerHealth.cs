@@ -22,6 +22,6 @@ public class PlayerHealth : MonoBehaviour
     public void gainHealth(int amount)
     {
         health += amount;
-        if (health < maxHealth) health = maxHealth;
+        if (health > maxHealth) health = maxHealth;
     }
 }
