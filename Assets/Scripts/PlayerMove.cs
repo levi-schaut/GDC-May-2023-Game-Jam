@@ -10,9 +10,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float accelerationDuration;
     [SerializeField] AnimationCurve deceleration;
     [SerializeField] float decelerationDuration;
+    [SerializeField] AudioClip[] footstepSoundClips;
+    [SerializeField] AudioSource footstepAudioSource;
+
     private Vector2 lastDirection;
     private float timePass = 0;
     private float currentSpeed;
+    private float timeSinceLastFootstep = 0;
 
     Rigidbody2D rb;
     Vector2 direction;
@@ -62,6 +66,16 @@ public class PlayerMove : MonoBehaviour
                 direction = lastDirection;
             }
         }
+        if (currentSpeed > 0 && speed > 0) {
+            timeSinceLastFootstep += Time.deltaTime;
+            float targetFootstepTime = 4f / (currentSpeed * speed);
+            if (timeSinceLastFootstep >= targetFootstepTime) {
+                PlayRandomFootstepSound();
+                timeSinceLastFootstep = 0;
+            }
+        } else {
+            timeSinceLastFootstep = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -72,5 +86,13 @@ public class PlayerMove : MonoBehaviour
     public Vector2 GetDirection()
     {
         return direction;
+    }
+
+    public void PlayRandomFootstepSound()
+    {
+        footstepAudioSource.pitch = Random.Range(0.5f, 1.5f);
+        int randomIndex = Random.Range(0, footstepSoundClips.Length);
+        AudioClip randomClip = footstepSoundClips[randomIndex];
+        footstepAudioSource.PlayOneShot(randomClip);
     }
 }
