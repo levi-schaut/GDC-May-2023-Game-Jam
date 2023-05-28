@@ -47,4 +47,4 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   radius: 5
   distancePercentage: 0.5
-  smoothTime: 0.1
+  smoothTime: 0
