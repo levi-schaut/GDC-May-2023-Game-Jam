@@ -34,10 +34,10 @@ public class Shooting : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         return worldPosition;
     }
-    private void Awake()
-    {
-        FirePoint = transform.Find("FirePoint");
-    }
+    //private void Awake()
+    //{
+    //    FirePoint = transform.Find("FirePoint");
+    //}
     // Start is called before the first frame update
     void Start()
     {
@@ -47,11 +47,23 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Grab the mouse position
         Vector3 mousePosition = GetMouseWorldPosition();
 
-        Vector3 aimDirection = (mousePosition - transform.position).normalized;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        FirePoint.eulerAngles = new Vector3(0, 0, angle);
+        // Calculate the angle to look at the mouse for both the player and the gun
+        Vector3 playerDirection = (mousePosition - transform.position).normalized;
+        float playerAngle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg;
+        Vector3 mouseDirection = (mousePosition - FirePoint.position).normalized;
+        float mouseAngle = Mathf.Atan2(mouseDirection.y, mouseDirection.x) * Mathf.Rad2Deg;
+
+        /* Set the angle of the fire point to aim at the mouse cursor only if it does not
+         * deviate too far from the PC's angle.  Otherwise, if the difference in angle 
+         * is too great, simply set the angle of the fire point to equal the PC's. */
+        if (Mathf.Abs(playerAngle - mouseAngle) <= 10f) {
+            FirePoint.eulerAngles = new Vector3(0, 0, mouseAngle);
+        } else {
+            FirePoint.eulerAngles = new Vector3(0, 0, playerAngle);
+        }
 
         if (Input.GetMouseButtonDown(0) && canFire)
         {
