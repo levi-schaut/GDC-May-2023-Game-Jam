@@ -6,12 +6,16 @@ public class EnemyCollide : MonoBehaviour
 {
     public int collideDamage;
     public int enemyHealth;
+    public AudioSource hitPlayerAudioSource;
+    public AudioSource gotHitAudioSource;
+    public AudioClip[] gotHitSoundClips;
 
     PlayerHealth playerHealth;
 
     private void Awake()
     {
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        //playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
     // Start is called before the first frame update
     void Start()
@@ -30,13 +34,19 @@ public class EnemyCollide : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             playerHealth.loseHealth(collideDamage);
+            hitPlayerAudioSource.pitch = Random.Range(0.8f, 1.2f);
+            hitPlayerAudioSource.Play();
         }
-        else if (collision.gameObject.name == "Bullet(Clone)")
+        else if (collision.gameObject.tag == "PlayerProjectile")
         {
             enemyHealth -= collideDamage;
+            gotHitAudioSource.pitch = Random.Range(0.8f, 1.2f);
+            int randomIndex = Random.Range(0, gotHitSoundClips.Length);
+            gotHitAudioSource.clip = gotHitSoundClips[randomIndex];
+            gotHitAudioSource.Play();
         }
     }
 }

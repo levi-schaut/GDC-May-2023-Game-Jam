@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: -4556512553748365583}
   m_Layer: 0
   m_Name: Player Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -361,7 +361,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -596,8 +596,8 @@ MonoBehaviour:
   FirePoint: {fileID: 4323727339785875507}
   BulletPrefab: {fileID: 7984606897429321563, guid: 6820af254a1a20540b8e32cf68218704, type: 3}
   gunshotAudioSource: {fileID: 2098978797}
-  bulletForce: 20
-  bulletCooldown: 0.1
+  bulletForce: 10
+  bulletCooldown: 0.2
 --- !u!82 &2098978797
 AudioSource:
   m_ObjectHideFlags: 0
