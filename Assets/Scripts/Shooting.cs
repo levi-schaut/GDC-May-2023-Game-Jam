@@ -7,8 +7,10 @@ public class Shooting : MonoBehaviour
 {
     public Transform FirePoint;
     public GameObject BulletPrefab;
+    public AudioSource gunshotAudioSource;
     [SerializeField] float bulletForce;
     [SerializeField] float bulletCooldown;
+
     private bool canFire;
 
     // Get Mouse Postion in World with Z = 0f
@@ -34,10 +36,7 @@ public class Shooting : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         return worldPosition;
     }
-    private void Awake()
-    {
-        
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +77,10 @@ public class Shooting : MonoBehaviour
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(FirePoint.right * bulletForce, ForceMode2D.Impulse);
+
+        float randomPitch = Random.Range(0.9f, 1.1f);
+        gunshotAudioSource.pitch = randomPitch;
+        gunshotAudioSource.Play();
     }
 
     IEnumerator fireCooldown()
