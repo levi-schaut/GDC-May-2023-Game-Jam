@@ -19,6 +19,8 @@ public class HealthExtractor : MonoBehaviour
     private bool canExtract;
 
 
+    public Animator animator;
+
     private void Awake()
     {
         instance = this;

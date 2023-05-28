@@ -64,7 +64,7 @@ public class Shooting : MonoBehaviour
             FirePoint.eulerAngles = new Vector3(0, 0, playerAngle);
         }
 
-        if (Input.GetMouseButtonDown(0) && canFire)
+        if (Input.GetMouseButtonDown(0) && canFire && Time.timeScale == 1f)
         {
             Shoot();
             canFire = false;
