@@ -9,7 +9,8 @@ public class HealthExtractor : MonoBehaviour
     // 0 = can't extract
     // 1 = can extract
 
-    PlayerHealth playerHealth;
+    public PlayerHealth playerHealth;
+
     EnemyCollide enemyCollide;
 
     public int extractAmount;
@@ -22,7 +23,7 @@ public class HealthExtractor : MonoBehaviour
     {
         instance = this;
 
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        //playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         enemyCollide = GameObject.Find("Enemy").GetComponent<EnemyCollide>();
 
         currentCondition = 0;
