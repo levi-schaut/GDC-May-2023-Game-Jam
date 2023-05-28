@@ -18,6 +18,8 @@ public class HealthExtractor : MonoBehaviour
 
     [SerializeField] float extractCooldown;
 
+    public Animator animator;
+
     private void Awake()
     {
         instance = this;

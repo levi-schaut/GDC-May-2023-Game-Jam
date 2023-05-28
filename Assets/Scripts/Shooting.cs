@@ -34,10 +34,10 @@ public class Shooting : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         return worldPosition;
     }
-    //private void Awake()
-    //{
-    //    FirePoint = transform.Find("FirePoint");
-    //}
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -65,7 +65,7 @@ public class Shooting : MonoBehaviour
             FirePoint.eulerAngles = new Vector3(0, 0, playerAngle);
         }
 
-        if (Input.GetMouseButtonDown(0) && canFire)
+        if (Input.GetMouseButtonDown(0) && canFire && Time.timeScale == 1f)
         {
             Shoot();
             canFire = false;
