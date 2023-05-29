@@ -8,6 +8,7 @@ public class HealthExtractor : MonoBehaviour
     public PlayerHealth playerHealth;
     public int extractAmount;
     [SerializeField] float extractCooldown;
+    public UIExtractorCooldown uiExtractorScript;
 
 
     int currentCondition;
@@ -18,8 +19,6 @@ public class HealthExtractor : MonoBehaviour
     EnemyCollide enemyCollide;
     private bool canExtract;
 
-
-    public Animator animator;
 
     private void Awake()
     {
@@ -47,6 +46,7 @@ public class HealthExtractor : MonoBehaviour
             enemyCollide.enemyHealth -= extractAmount;
 
             canExtract = false;
+            uiExtractorScript.StartRecharging(extractCooldown);
             StartCoroutine(extractWait());
         }
         
