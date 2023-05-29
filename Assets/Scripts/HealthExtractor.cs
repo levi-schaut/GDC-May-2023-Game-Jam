@@ -7,8 +7,9 @@ public class HealthExtractor : MonoBehaviour
     public static HealthExtractor instance;
     public PlayerHealth playerHealth;
     public int extractAmount;
+    public float extractDuration;
     [SerializeField] float extractCooldown;
-    public UIExtractorCooldown uiExtractorScript;
+    public UIExtractorCooldown UIExtractorScript;
 
 
     int currentCondition;
@@ -17,6 +18,7 @@ public class HealthExtractor : MonoBehaviour
 
 
     EnemyCollide enemyCollide;
+    ParticleSystem healthExtrationParticles;
     private bool canExtract;
 
 
@@ -25,7 +27,9 @@ public class HealthExtractor : MonoBehaviour
         instance = this;
 
         //playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
-        enemyCollide = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyCollide>();
+        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemyCollide = enemy.GetComponent<EnemyCollide>();
+        healthExtrationParticles = enemy.GetComponentInChildren<ParticleSystem>();
 
         currentCondition = 0;
     }
@@ -34,6 +38,7 @@ public class HealthExtractor : MonoBehaviour
     void Start()
     {
         canExtract = true;
+
     }
 
     // Update is called once per frame
@@ -41,13 +46,9 @@ public class HealthExtractor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && currentCondition == 1 && canExtract)
         {
-            playerHealth.gainHealth(extractAmount);
-
-            enemyCollide.enemyHealth -= extractAmount;
-
-            canExtract = false;
-            uiExtractorScript.StartRecharging(extractCooldown);
-            StartCoroutine(extractWait());
+            StartCoroutine(ExtractionInProgress());
+            //UIExtractorScript.StartRecharging(extractCooldown);
+            StartCoroutine(ExtractWait());
         }
         
         //Debug.Log(currentCondition);
@@ -58,7 +59,19 @@ public class HealthExtractor : MonoBehaviour
         currentCondition = condition;
     }
 
-    IEnumerator extractWait()
+    IEnumerator ExtractionInProgress()
+    {
+        canExtract = false;
+        healthExtrationParticles.Play();
+        //playerHealth.gainHealth(extractAmount);
+        enemyCollide.enemyHealth -= extractAmount;
+
+        yield return new WaitForSeconds(extractDuration);
+
+        healthExtrationParticles.Stop();
+    }
+
+    IEnumerator ExtractWait()
     {
         yield return new WaitForSeconds(extractCooldown);
         canExtract = true;
