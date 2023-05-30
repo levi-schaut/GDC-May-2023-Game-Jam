@@ -9,6 +9,8 @@ public class HealthExtractor : MonoBehaviour
     public int extractAmount;
     [SerializeField] float extractCooldown;
 
+    public Sprite playerWithHealthExtractor;
+
 
     int currentCondition;
     // 0 = can't extract
@@ -42,6 +44,8 @@ public class HealthExtractor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && currentCondition == 1 && canExtract)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerWithHealthExtractor;
+
             playerHealth.gainHealth(extractAmount);
 
             enemyCollide.enemyHealth -= extractAmount;
