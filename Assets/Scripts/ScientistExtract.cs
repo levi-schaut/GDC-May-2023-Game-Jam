@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ScientistExtract : MonoBehaviour
 {
-    ScientistCounter scientistCounter;
+    ScientistIndicator scientistIndicator;
 
     private void Awake()
     {
-        scientistCounter = GameObject.Find("Game Manager").GetComponent<ScientistCounter>();
+        scientistIndicator = GameObject.Find("In Game UI").GetComponent<ScientistIndicator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -24,10 +24,10 @@ public class ScientistExtract : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
-        { 
-            scientistCounter.scientistCount(1); 
-            
+        if (collision.gameObject.tag == "Player")
+        {
+            scientistIndicator.number -= 1f;
+
             Destroy(this.gameObject);
         }
     }

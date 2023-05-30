@@ -13,6 +13,8 @@ public class Shooting : MonoBehaviour
 
     private bool canFire;
 
+    public Sprite playerWithPistol;
+
     // Get Mouse Postion in World with Z = 0f
     public static Vector3 GetMouseWorldPosition()
     {
@@ -66,6 +68,7 @@ public class Shooting : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && canFire && Time.timeScale == 1f)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerWithPistol;
             Shoot();
             canFire = false;
             StartCoroutine(fireCooldown());

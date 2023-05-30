@@ -11,6 +11,8 @@ public class HealthExtractor : MonoBehaviour
     [SerializeField] float extractCooldown;
     public UIExtractorCooldown UIExtractorScript;
 
+    public Sprite playerWithHealthExtractor;
+
 
     int currentCondition;
     // 0 = can't extract
@@ -61,6 +63,7 @@ public class HealthExtractor : MonoBehaviour
 
     IEnumerator ExtractionInProgress()
     {
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = playerWithHealthExtractor;
         canExtract = false;
         healthExtrationParticles.Play();
         //playerHealth.gainHealth(extractAmount);
