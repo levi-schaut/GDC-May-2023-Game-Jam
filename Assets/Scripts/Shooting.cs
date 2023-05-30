@@ -10,6 +10,7 @@ public class Shooting : MonoBehaviour
     public AudioSource gunshotAudioSource;
     [SerializeField] float bulletForce;
     [SerializeField] float bulletCooldown;
+    public MuzzleFlash muzzleFlash;
 
     private bool canFire;
 
@@ -74,6 +75,9 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
+        muzzleFlash.StartFlash();
+        CinemachineShake.Instance.ShakeCamera(1f, 0.1f);
+
         GameObject bullet = Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(FirePoint.right * bulletForce, ForceMode2D.Impulse);
