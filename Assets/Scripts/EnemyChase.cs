@@ -6,10 +6,13 @@ using UnityEngine.AI;
 
 public class EnemyChase : MonoBehaviour
 {
-    public float speed;
-    private float distance;
-
+    public float speed;             // Default speed of the zombie
+    public float lightSpeedMultiplier;  // Multiplies to the speed whenever the zombie is in light
+    public float detectionRange;    // Distance at which the zombie will detect the player
+    
+    private float distance;         
     private GameObject player;
+    private int numLightsIn = 0;    // The number of lights the zombie is currently in.
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +28,32 @@ public class EnemyChase : MonoBehaviour
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (distance < 10)
+        if (distance < detectionRange)
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
+            float currentSpeed;
+            if (numLightsIn > 0) {
+                currentSpeed = speed * lightSpeedMultiplier;
+            } else {
+                currentSpeed = speed;
+            }
+            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "LightSource") {
+            numLightsIn++;
+            Debug.Log("Zombie is in " + numLightsIn + " light(s).");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "LightSource") {
+            numLightsIn--;
+            Debug.Log("Zombie is in " + numLightsIn + " light(s).");
         }
     }
 }
