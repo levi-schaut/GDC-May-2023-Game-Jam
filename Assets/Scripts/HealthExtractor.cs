@@ -61,7 +61,6 @@ public class HealthExtractor : MonoBehaviour
 
     IEnumerator ExtractionInProgress()
     {
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = playerWithHealthExtractor;
         canExtract = false;
         healthExtrationParticles.Play();
 
