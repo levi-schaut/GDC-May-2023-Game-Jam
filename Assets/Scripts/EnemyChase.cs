@@ -45,7 +45,6 @@ public class EnemyChase : MonoBehaviour
     {
         if (collision.tag == "LightSource") {
             numLightsIn++;
-            Debug.Log("Zombie is in " + numLightsIn + " light(s).");
         }
     }
 
@@ -53,7 +52,6 @@ public class EnemyChase : MonoBehaviour
     {
         if (collision.tag == "LightSource") {
             numLightsIn--;
-            Debug.Log("Zombie is in " + numLightsIn + " light(s).");
         }
     }
 }

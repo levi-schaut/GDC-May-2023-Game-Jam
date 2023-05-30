@@ -47,8 +47,6 @@ public class HealthExtractor : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && currentCondition == 1 && canExtract)
         {
             StartCoroutine(ExtractionInProgress());
-            //UIExtractorScript.StartRecharging(extractCooldown);
-            StartCoroutine(ExtractWait());
         }
         
         //Debug.Log(currentCondition);
@@ -63,12 +61,16 @@ public class HealthExtractor : MonoBehaviour
     {
         canExtract = false;
         healthExtrationParticles.Play();
-        //playerHealth.gainHealth(extractAmount);
-        enemyCollide.enemyHealth -= extractAmount;
 
         yield return new WaitForSeconds(extractDuration);
 
-        healthExtrationParticles.Stop();
+        if (healthExtrationParticles)
+            healthExtrationParticles.Stop();
+        playerHealth.gainHealth(extractAmount);
+        enemyCollide.enemyHealth -= extractAmount;
+
+        UIExtractorScript.StartRecharging(extractCooldown);
+        StartCoroutine(ExtractWait());
     }
 
     IEnumerator ExtractWait()

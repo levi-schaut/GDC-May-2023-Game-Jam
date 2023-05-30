@@ -1175,6 +1175,7 @@ MonoBehaviour:
   gunshotAudioSource: {fileID: 2098978797}
   bulletForce: 10
   bulletCooldown: 0.2
+  playerWithPistol: {fileID: 21300000, guid: 8915d2a187ac04049acbf6a7c2489628, type: 3}
 --- !u!82 &2098978797
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1288,3 +1289,4 @@ MonoBehaviour:
   extractDuration: 2
   extractCooldown: 3
   UIExtractorScript: {fileID: 0}
+  playerWithHealthExtractor: {fileID: 188605209, guid: 1fba3b89e7f43b848ac2320fea7b1f75, type: 3}
