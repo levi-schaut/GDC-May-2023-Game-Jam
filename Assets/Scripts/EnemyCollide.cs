@@ -36,19 +36,19 @@ public class EnemyCollide : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerHealth.loseHealth(collideDamage);
             hitPlayerAudioSource.pitch = Random.Range(0.8f, 1.2f);
             hitPlayerAudioSource.Play();
             CinemachineShake.Instance.ShakeCamera(2f, 0.2f);
             FlashImage.Instance.StartFlash(0.25f, 0.5f);
+            playerHealth.loseHealth(collideDamage);
         }
         else if (collision.gameObject.tag == "PlayerProjectile")
         {
-            enemyHealth -= collideDamage;
             gotHitAudioSource.pitch = Random.Range(0.8f, 1.2f);
             int randomIndex = Random.Range(0, gotHitSoundClips.Length);
             gotHitAudioSource.clip = gotHitSoundClips[randomIndex];
             gotHitAudioSource.Play();
+            enemyHealth -= collideDamage;
         }
     }
 }
