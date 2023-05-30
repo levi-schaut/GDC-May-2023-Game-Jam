@@ -39,6 +39,8 @@ public class EnemyCollide : MonoBehaviour
             playerHealth.loseHealth(collideDamage);
             hitPlayerAudioSource.pitch = Random.Range(0.8f, 1.2f);
             hitPlayerAudioSource.Play();
+            CinemachineShake.Instance.ShakeCamera(2f, 0.2f);
+            FlashImage.Instance.StartFlash(0.25f, 0.5f);
         }
         else if (collision.gameObject.tag == "PlayerProjectile")
         {
