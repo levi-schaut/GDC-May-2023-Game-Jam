@@ -13,11 +13,13 @@ public class EnemyChase : MonoBehaviour
     private float distance;         
     private GameObject player;
     private int numLightsIn = 0;    // The number of lights the zombie is currently in.
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -36,8 +38,11 @@ public class EnemyChase : MonoBehaviour
             } else {
                 currentSpeed = speed;
             }
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            rb.velocity = direction * currentSpeed;
+        } else {
+            rb.velocity = Vector2.zero;
         }
     }
 
