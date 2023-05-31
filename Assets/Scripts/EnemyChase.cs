@@ -33,9 +33,12 @@ public class EnemyChase : MonoBehaviour
         if (distance < detectionRange)
         {
             float currentSpeed;
-            if (numLightsIn > 0) {
+            if (numLightsIn > 0)
+            {
                 currentSpeed = speed * lightSpeedMultiplier;
-            } else {
+            }
+            else
+            {
                 currentSpeed = speed;
             }
             //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
