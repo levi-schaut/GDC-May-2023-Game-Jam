@@ -7,6 +7,8 @@ using UnityEngine.Rendering.Universal;
 public class LightFlicker : MonoBehaviour
 {
     public float flickerDelay = 5;
+    public float highIntensity = 0.5f;
+    public float lowIntensity = 0.25f;
 
     Light2D light;
     
@@ -15,7 +17,7 @@ public class LightFlicker : MonoBehaviour
     {
         light = GetComponent<Light2D>();
         flickerDelay += Random.Range(-1.0f, 1.0f);
-        light.intensity = 0.75f;
+        light.intensity = highIntensity;
         StartCoroutine(Flickering());
     }
 
@@ -26,14 +28,13 @@ public class LightFlicker : MonoBehaviour
 
             float halfDuration = 0.15f;
             for (float t = 0; t <= halfDuration; t += Time.deltaTime) {
-                light.intensity = Mathf.Lerp(0.75f, 0.25f, t/halfDuration);
+                light.intensity = Mathf.Lerp(highIntensity, lowIntensity, t/halfDuration);
                 yield return null;
             }
             for (float t = 0; t <= halfDuration; t += Time.deltaTime) {
-                light.intensity = Mathf.Lerp(0.25f, 0.75f, t / halfDuration);
+                light.intensity = Mathf.Lerp(lowIntensity, highIntensity, t / halfDuration);
                 yield return null;
             }
         }
-        yield return null;
     }
 }
