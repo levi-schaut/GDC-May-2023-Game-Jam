@@ -8,7 +8,7 @@ public class ScientistExtract : MonoBehaviour
 
     private void Awake()
     {
-        scientistIndicator = GameObject.Find("In Game UI").GetComponent<ScientistIndicator>();
+        scientistIndicator = GameObject.FindGameObjectWithTag("In Game UI").GetComponent<ScientistIndicator>();
     }
     // Start is called before the first frame update
     void Start()
