@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyHover : MonoBehaviour
 {
+    bool canHover = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,20 +19,19 @@ public class EnemyHover : MonoBehaviour
     }
 
     void OnMouseEnter()
-    {
-        Debug.Log("Over an enemy");
-
-        HealthExtractor.instance.SetHoveredEnemy(gameObject);
-        
-        
+    {   
     }
 
     void OnMouseExit()
     {
-        Debug.Log("Not over an enemy");
-
         HealthExtractor.instance.SetNotHovered();
 
         
+    }
+
+    public void StopHovering()
+    {
+        canHover = false;
+        HealthExtractor.instance.SetNotHovered();
     }
 }

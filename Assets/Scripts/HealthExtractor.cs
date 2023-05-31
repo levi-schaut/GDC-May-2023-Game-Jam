@@ -49,15 +49,6 @@ public class HealthExtractor : MonoBehaviour
         
         //Debug.Log(currentCondition);
     }
-
-    public void SetHoveredEnemy (GameObject enemy)
-    {
-        Debug.Log("Hovered on Enemy");
-        
-        currentCondition = 1;
-
-        enemyCollide = enemy.GetComponent<EnemyCollide>();
-        healthExtrationParticles = enemy.GetComponentInChildren<ParticleSystem>();
     }
 
     public void SetNotHovered()
