@@ -1105,6 +1105,7 @@ MonoBehaviour:
   maxHealth: 15
   health: 15
   healthBar: {fileID: 0}
+  loseScreen: {fileID: 0}
 --- !u!114 &4323727340788430420
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,10 +29,17 @@ public class CinemachineShake : MonoBehaviour
     {
         if (shakeTimer > 0) {
             shakeTimer -= Time.deltaTime;
-            if (shakeTimer <= 0f) {
-                perlin.m_AmplitudeGain = 0f;
-                mainCamera.rotation = Quaternion.identity;
-            }
         }
+        else {
+            perlin.m_AmplitudeGain = 0f;
+            mainCamera.rotation = Quaternion.identity;
+        }
+    }
+
+    public void StopShaking()
+    {
+        shakeTimer = 0f;
+        perlin.m_AmplitudeGain = 0f;
+        mainCamera.rotation = Quaternion.identity;
     }
 }
