@@ -22,14 +22,14 @@ public class ZombieGrowls : MonoBehaviour
     IEnumerator Growling()
     {
         while (isGrowling) {
-            float growlDelay = Random.Range(minGrowlDelay, maxGrowlDelay);
-            yield return  new WaitForSeconds(growlDelay);
-
             float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
             growlAudioSource.clip = growlClips[Random.Range(0, growlClips.Length)];
             growlAudioSource.pitch = Random.Range(0.8f, 1.2f);
             growlAudioSource.volume = growlVolumeOverDistance.Evaluate(distanceFromPlayer);
             growlAudioSource.Play();
+
+            float growlDelay = Random.Range(minGrowlDelay, maxGrowlDelay);
+            yield return new WaitForSeconds(growlDelay);
         }
     }
 
