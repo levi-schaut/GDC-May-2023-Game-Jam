@@ -16,6 +16,7 @@ public class EnemyCollide : MonoBehaviour
     {
         //playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -26,8 +27,10 @@ public class EnemyCollide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyHealth == 0)
+        if (enemyHealth <= 0)
         {
+            EnemySpawner.instance.EnemyDied();
+            
             Destroy(this.gameObject);
         }
     }

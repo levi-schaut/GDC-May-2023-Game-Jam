@@ -39,6 +39,14 @@ public class EnemyChase : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
+        else
+        {
+            EnemySpawner.instance.EnemyDied();
+
+            Debug.Log("Despawned Enemy");
+
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
