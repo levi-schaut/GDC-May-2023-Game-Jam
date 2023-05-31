@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,6 +16,8 @@ public class EnemyChase : MonoBehaviour
     private int numLightsIn = 0;    // The number of lights the zombie is currently in.
     private Rigidbody2D rb;
     private bool isChasing = true;
+
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -52,14 +55,6 @@ public class EnemyChase : MonoBehaviour
 
                 Destroy(this.gameObject);
             }
-        }
-    }
-
-    public void StopChasing()
-    {
-        isChasing = false;
-        rb.velocity = Vector2.zero;
-        rb.rotation = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
