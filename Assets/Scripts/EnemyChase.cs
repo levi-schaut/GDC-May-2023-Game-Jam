@@ -58,26 +58,26 @@ public class EnemyChase : MonoBehaviour
         }
     }
 
-        public void StopChasing()
+    public void StopChasing()
     {
         isChasing = false;
         rb.velocity = Vector2.zero;
         rb.rotation = 0f;
     }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "LightSource")
         {
-            if (collision.tag == "LightSource")
-            {
-                numLightsIn++;
-            }
+            numLightsIn++;
         }
+    }
 
-        private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "LightSource")
         {
-            if (collision.tag == "LightSource")
-            {
-                numLightsIn--;
-            }
+            numLightsIn--;
         }
+    }
 }
