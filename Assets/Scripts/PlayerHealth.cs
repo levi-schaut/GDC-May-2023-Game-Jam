@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth;
-    public int health;
+    int health;
 
     public HealthBar healthBar;
     public LoseScreen loseScreen;
