@@ -4973,7 +4973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collideDamage: 1
-  enemyHealth: 3
+  enemyHealth: 2
   hitPlayerAudioSource: {fileID: 2065981247004306335}
   gotHitAudioSource: {fileID: -1055628163892972488}
   gotHitSoundClips:
@@ -5196,8 +5196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567be4d2ebab17b4facd226af9ec01b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minGrowlDelay: 3
-  maxGrowlDelay: 6
+  minGrowlDelay: 2
+  maxGrowlDelay: 4
   growlVolumeOverDistance:
     serializedVersion: 2
     m_Curve:
@@ -5211,25 +5211,16 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.011764706
     - serializedVersion: 3
-      time: 3.498514
-      value: 0.31713364
-      inSlope: -0.04802307
-      outSlope: -0.04802307
+      time: 3.1782472
+      value: 0.27114365
+      inSlope: -0.06731292
+      outSlope: -0.06731292
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.18155836
+      outWeight: 0.062877454
     - serializedVersion: 3
-      time: 10.043556
-      value: 0.16436887
-      inSlope: -0.0053815874
-      outSlope: -0.0053815874
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.19195136
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 20
+      time: 15
       value: 0
       inSlope: 0
       outSlope: 0
@@ -5356,3 +5347,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deadSprite: {fileID: 21300000, guid: 4d1a426887564fe4d968f5feaf03c37c, type: 3}
+  secondsToDisappear: 5
