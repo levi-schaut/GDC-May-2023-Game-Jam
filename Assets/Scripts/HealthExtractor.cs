@@ -49,7 +49,6 @@ public class HealthExtractor : MonoBehaviour
         
         //Debug.Log(currentCondition);
     }
-    }
 
     public void SetNotHovered()
     {
@@ -64,12 +63,14 @@ public class HealthExtractor : MonoBehaviour
         yield return new WaitForSeconds(extractDuration);
 
         if (healthExtrationParticles)
+        {
             healthExtrationParticles.Stop();
-        playerHealth.gainHealth(extractAmount);
-        enemyCollide.enemyHealth -= extractAmount;
+            playerHealth.gainHealth(extractAmount);
+            enemyCollide.enemyHealth -= extractAmount;
 
-        UIExtractorScript.StartRecharging(extractCooldown);
-        StartCoroutine(ExtractWait());
+            UIExtractorScript.StartRecharging(extractCooldown);
+            StartCoroutine(ExtractWait());
+        }
     }
 
     IEnumerator ExtractWait()

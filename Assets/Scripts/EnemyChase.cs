@@ -10,14 +10,12 @@ public class EnemyChase : MonoBehaviour
     public float speed;             // Default speed of the zombie
     public float lightSpeedMultiplier;  // Multiplies to the speed whenever the zombie is in light
     public float detectionRange;    // Distance at which the zombie will detect the player
-    
-    private float distance;         
+
+    private float distance;
     private GameObject player;
     private int numLightsIn = 0;    // The number of lights the zombie is currently in.
     private Rigidbody2D rb;
     private bool isChasing = true;
-
-    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +27,8 @@ public class EnemyChase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isChasing) {
+        if (isChasing)
+        {
             distance = Vector2.Distance(transform.position, player.transform.position);
             Vector2 direction = player.transform.position - transform.position;
             direction.Normalize();
@@ -49,25 +48,36 @@ public class EnemyChase : MonoBehaviour
                 //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(Vector3.forward * angle);
                 rb.velocity = direction * currentSpeed;
-            } else
+            }
+            else
             {
                 EnemySpawner.instance.EnemyDied();
 
                 Destroy(this.gameObject);
             }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "LightSource") {
-            numLightsIn++;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+        public void StopChasing()
     {
-        if (collision.tag == "LightSource") {
-            numLightsIn--;
-        }
+        isChasing = false;
+        rb.velocity = Vector2.zero;
+        rb.rotation = 0f;
     }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "LightSource")
+            {
+                numLightsIn++;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.tag == "LightSource")
+            {
+                numLightsIn--;
+            }
+        }
 }
