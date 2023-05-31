@@ -11,6 +11,7 @@ public class ZombieGrowls : MonoBehaviour
     public AudioClip[] growlClips;
 
     private GameObject player;
+    private bool isGrowling = true;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class ZombieGrowls : MonoBehaviour
 
     IEnumerator Growling()
     {
-        while (true) {
+        while (isGrowling) {
             float growlDelay = Random.Range(minGrowlDelay, maxGrowlDelay);
             yield return  new WaitForSeconds(growlDelay);
 
@@ -30,5 +31,11 @@ public class ZombieGrowls : MonoBehaviour
             growlAudioSource.volume = growlVolumeOverDistance.Evaluate(distanceFromPlayer);
             growlAudioSource.Play();
         }
+    }
+
+    public void StopGrowling()
+    {
+        isGrowling = false;
+        growlAudioSource.Stop();
     }
 }

@@ -14,6 +14,7 @@ public class EnemyChase : MonoBehaviour
     private GameObject player;
     private int numLightsIn = 0;    // The number of lights the zombie is currently in.
     private Rigidbody2D rb;
+    private bool isChasing = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,36 +26,40 @@ public class EnemyChase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (isChasing) {
+            distance = Vector2.Distance(transform.position, player.transform.position);
+            Vector2 direction = player.transform.position - transform.position;
+            direction.Normalize();
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (distance < detectionRange)
-        {
-            float currentSpeed;
-            if (numLightsIn > 0)
+            if (distance < detectionRange)
             {
-                currentSpeed = speed * lightSpeedMultiplier;
-            }
-            else
+                float currentSpeed;
+                if (numLightsIn > 0)
+                {
+                    currentSpeed = speed * lightSpeedMultiplier;
+                }
+                else
+                {
+                    currentSpeed = speed;
+                }
+                //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+                rb.velocity = direction * currentSpeed;
+            } else
             {
-                currentSpeed = speed;
+                EnemySpawner.instance.EnemyDied();
+
+                Destroy(this.gameObject);
             }
-            //transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, currentSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
-            rb.velocity = direction * currentSpeed;
-        } else {
-            rb.velocity = Vector2.zero;
         }
-        else
-        {
-            EnemySpawner.instance.EnemyDied();
+    }
 
-            Debug.Log("Despawned Enemy");
-
-            Destroy(this.gameObject);
-        }
+    public void StopChasing()
+    {
+        isChasing = false;
+        rb.velocity = Vector2.zero;
+        rb.rotation = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
