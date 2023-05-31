@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int health;
 
     public HealthBar healthBar;
+    public LoseScreen loseScreen;
 
     private void Awake()
     {
@@ -19,9 +20,15 @@ public class PlayerHealth : MonoBehaviour
     public void loseHealth(int amount)
     {
         health -= amount;
-        if (health < 0) health = 0;
+        if (health < 0) { 
+            health = 0;
+        }
 
         healthBar.SetHealth(health);
+
+        if (health == 0) {
+            loseScreen.LoseGame();
+        }
     }
 
     public void gainHealth(int amount)
