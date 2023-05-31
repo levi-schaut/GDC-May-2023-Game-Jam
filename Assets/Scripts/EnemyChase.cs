@@ -44,6 +44,14 @@ public class EnemyChase : MonoBehaviour
         } else {
             rb.velocity = Vector2.zero;
         }
+        else
+        {
+            EnemySpawner.instance.EnemyDied();
+
+            Debug.Log("Despawned Enemy");
+
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

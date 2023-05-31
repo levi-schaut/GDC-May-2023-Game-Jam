@@ -6,52 +6,96 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
-    // public bool stopSpawning;
-    public float spawnTime;
-    public float spawnDelay;
-
     GameObject player;
+
+    public float waitTime;
+
+    public GameObject[] spawnLocations;
+
+    public bool canSpawn = true;
+
+    public int maxEnemies;
+
+    private int currentEnemies = 0;
+
+    public float maxSpawnDistance;
+
+    public static EnemySpawner instance;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        instance = this;
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", spawnTime, spawnDelay);
+        StartSpawning();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player.transform.position.y);
+        
+    }  
 
-        if (player.transform.position.y > 3)
-        {
-            //stopSpawning = true;
-
-            this.enabled = false;
-        }
-        else
-        {
-            //stopSpawning = false;
-
-            this.enabled = true;
-        }
+    public void StartSpawning()
+    {
+        StartCoroutine(SpawnRoutine());
     }
 
-    public void SpawnEnemy()
+    public void EnemyDied()
     {
-        Instantiate(enemy, transform.position, transform.rotation);
-        
-        /*if (stopSpawning)
-        {
-            CancelInvoke("SpawnEnemy");
-        }*/
+        currentEnemies--;
+    }
 
-        
+    IEnumerator SpawnRoutine()
+    {
+        while (canSpawn)
+        {
+            if (currentEnemies >= maxEnemies)
+            {
+                yield return null;
+            }
+            else
+            {
+
+                bool spawnPointFound = false;
+                Debug.Log("Searching for spawn points");
+
+                int spawnAttempts = 0;
+
+                while (!spawnPointFound && spawnAttempts < 5)
+                {
+                    int randomIndex = Random.Range(0, spawnLocations.Length);
+
+                    GameObject spawnPoint = spawnLocations[randomIndex];
+
+                    float distance = Vector2.Distance(player.transform.position, spawnPoint.transform.position);
+
+                    spawnAttempts++;
+
+                    if (distance < maxSpawnDistance)
+                    {
+
+                        spawnPointFound = true;
+                        Instantiate(enemy, spawnPoint.transform.position, transform.rotation);
+                        currentEnemies++;
+                    }
+                }
+                if (!spawnPointFound)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    Debug.Log("Enemy Spawned");
+                    yield return new WaitForSeconds(waitTime);
+                }
+            }
+        }
     }
 }
