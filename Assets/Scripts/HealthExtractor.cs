@@ -29,10 +29,6 @@ public class HealthExtractor : MonoBehaviour
         instance = this;
 
         //playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyCollide = enemy.GetComponent<EnemyCollide>();
-        healthExtrationParticles = enemy.GetComponentInChildren<ParticleSystem>();
-
         currentCondition = 0;
     }
 
@@ -54,9 +50,19 @@ public class HealthExtractor : MonoBehaviour
         //Debug.Log(currentCondition);
     }
 
-    public void SetCondition (int condition)
+    public void SetHoveredEnemy (GameObject enemy)
     {
-        currentCondition = condition;
+        Debug.Log("Hovered on Enemy");
+        
+        currentCondition = 1;
+
+        enemyCollide = enemy.GetComponent<EnemyCollide>();
+        healthExtrationParticles = enemy.GetComponentInChildren<ParticleSystem>();
+    }
+
+    public void SetNotHovered()
+    {
+        currentCondition = 0;
     }
 
     IEnumerator ExtractionInProgress()

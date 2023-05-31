@@ -1102,8 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af4846e6a655054ba0fb8b4fe8576e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 5
+  maxHealth: 15
+  health: 15
   healthBar: {fileID: 0}
 --- !u!114 &4323727340788430420
 MonoBehaviour:
@@ -1304,6 +1304,7 @@ MonoBehaviour:
   bulletForce: 10
   bulletCooldown: 0.2
   muzzleFlash: {fileID: 1636661733}
+  playerWithPistol: {fileID: 21300000, guid: 8915d2a187ac04049acbf6a7c2489628, type: 3}
 --- !u!82 &2098978797
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1417,3 +1418,4 @@ MonoBehaviour:
   extractDuration: 2
   extractCooldown: 3
   UIExtractorScript: {fileID: 0}
+  playerWithHealthExtractor: {fileID: 188605209, guid: 1fba3b89e7f43b848ac2320fea7b1f75, type: 3}

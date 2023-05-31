@@ -18,15 +18,19 @@ public class EnemyHover : MonoBehaviour
 
     void OnMouseEnter()
     {
-        HealthExtractor.instance.SetCondition(1);
+        Debug.Log("Over an enemy");
+
+        HealthExtractor.instance.SetHoveredEnemy(gameObject);
         
-        //Debug.Log("Over an enemy");
+        
     }
 
     void OnMouseExit()
     {
-        HealthExtractor.instance.SetCondition(0);
+        Debug.Log("Not over an enemy");
 
-        //Debug.Log("Not over an enemy");
+        HealthExtractor.instance.SetNotHovered();
+
+        
     }
 }

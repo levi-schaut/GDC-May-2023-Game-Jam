@@ -64,7 +64,6 @@ public class EnemySpawner : MonoBehaviour
             {
 
                 bool spawnPointFound = false;
-                Debug.Log("Searching for spawn points");
 
                 int spawnAttempts = 0;
 
@@ -92,7 +91,6 @@ public class EnemySpawner : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Enemy Spawned");
                     yield return new WaitForSeconds(waitTime);
                 }
             }
