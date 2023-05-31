@@ -11,7 +11,8 @@ public class ScientistIndicator : MonoBehaviour
     public TMP_Text returnToExitText;
     public GameObject winZone;
     public EnemySpawner spawnSystem;
-    // public AlarmSystem alarms;
+    public GameObject alarms;
+    public GameObject environmentLights;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,8 @@ public class ScientistIndicator : MonoBehaviour
             winZone.SetActive(true);
             spawnSystem.waitTime = 1f;
             spawnSystem.maxEnemies = 8;
+            environmentLights.SetActive(false);
+            alarms.SetActive(true);
         }
     }
 }
