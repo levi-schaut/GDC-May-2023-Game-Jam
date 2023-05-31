@@ -10,6 +10,8 @@ public class ScientistIndicator : MonoBehaviour
     public float number;
     public TMP_Text returnToExitText;
     public GameObject winZone;
+    public EnemySpawner spawnSystem;
+    // public AlarmSystem alarms;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class ScientistIndicator : MonoBehaviour
         if (number < 1) {
             returnToExitText.gameObject.SetActive(true);
             winZone.SetActive(true);
+            spawnSystem.waitTime = 1f;
+            spawnSystem.maxEnemies = 8;
         }
     }
 }

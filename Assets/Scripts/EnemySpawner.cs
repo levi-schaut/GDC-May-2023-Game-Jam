@@ -7,20 +7,17 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
     GameObject player;
-
     public float waitTime;
-
     public GameObject[] spawnLocations;
-
     public bool canSpawn = true;
-
     public int maxEnemies;
+    public float maxSpawnDistance;
+    public float minSpawnDistance;
+    public static EnemySpawner instance;
 
     private int currentEnemies = 0;
+    int lastSpawnIndex = 999;
 
-    public float maxSpawnDistance;
-
-    public static EnemySpawner instance;
 
     private void Awake()
     {
@@ -71,18 +68,22 @@ public class EnemySpawner : MonoBehaviour
                 {
                     int randomIndex = Random.Range(0, spawnLocations.Length);
 
+                    if (randomIndex == lastSpawnIndex)
+                        randomIndex = (randomIndex + 1) % spawnLocations.Length;
+
                     GameObject spawnPoint = spawnLocations[randomIndex];
 
                     float distance = Vector2.Distance(player.transform.position, spawnPoint.transform.position);
 
                     spawnAttempts++;
 
-                    if (distance < maxSpawnDistance)
+                    if (distance < maxSpawnDistance && distance > minSpawnDistance)
                     {
 
                         spawnPointFound = true;
                         Instantiate(enemy, spawnPoint.transform.position, transform.rotation);
                         currentEnemies++;
+                        lastSpawnIndex = randomIndex;
                     }
                 }
                 if (!spawnPointFound)

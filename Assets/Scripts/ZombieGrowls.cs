@@ -19,13 +19,17 @@ public class ZombieGrowls : MonoBehaviour
         StartCoroutine(Growling());
     }
 
+    private void Update()
+    {
+        float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
+        growlAudioSource.volume = growlVolumeOverDistance.Evaluate(distanceFromPlayer);
+    }
+
     IEnumerator Growling()
     {
         while (isGrowling) {
-            float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
             growlAudioSource.clip = growlClips[Random.Range(0, growlClips.Length)];
             growlAudioSource.pitch = Random.Range(0.8f, 1.2f);
-            growlAudioSource.volume = growlVolumeOverDistance.Evaluate(distanceFromPlayer);
             growlAudioSource.Play();
 
             float growlDelay = Random.Range(minGrowlDelay, maxGrowlDelay);
